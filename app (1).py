@@ -105,7 +105,7 @@ elif menu == 'Nova Solicitação':
         col1, col2 = st.columns(2)
         with col1:
             responsavel = st.selectbox('Responsável', 
-                                     ['Ana Silva', 'Bruno Santos', 'Carla Oliveira', 'Daniel Costa'])
+                                     ['Isabel', 'Douglas', 'Guilherme', 'Leandro'])
         with col2:
             prioridade = st.selectbox('Prioridade', ['Alta', 'Média', 'Baixa'])
 
@@ -150,13 +150,13 @@ elif menu == 'Tarefas':
 
                 with col1:
                     st.subheader(f"#{row['id']} - {row['titulo']}")
-                    st.write(f"📝 {row['descricao']}")
-                    st.write(f"👤 **{row['responsavel']}** | 🎯 **{row['prioridade']}**")
+                    st.write(f" {row['descricao']}")
+                    st.write(f" **{row['responsavel']}** | **{row['prioridade']}**")
                     st.caption(f"Criado em: {row['criado_em']}")
 
                 with col2:
-                    status_color = {'Novo': '🆕', 'Em Andamento': '⏳', 'Concluído': '✅'}
-                    st.markdown(f"### {status_color.get(row['status'], '❓')} {row['status']}")
+                    status_color = {'Novo', 'Em Andamento', 'Concluído'}
+                    st.markdown(f"### {status_color.get(row['status'])} {row['status']}")
 
                 with col3:
                     new_status = st.selectbox(

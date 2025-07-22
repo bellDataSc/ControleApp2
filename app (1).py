@@ -59,14 +59,14 @@ def load_tasks():
 
 # ---------- UI ----------
 st.set_page_config(page_title='EquipeApp', layout='wide')
-st.title('📋 EquipeApp - Controle de Demandas')
+st.title('EquipeApp - Controle de Demandas')
 
 # Sidebar com navegação
 menu = st.sidebar.selectbox('Menu', ['Dashboard', 'Nova Solicitação', 'Tarefas', 'Equipe'])
 
 # ---------- Dashboard ----------
 if menu == 'Dashboard':
-    st.header('📊 Dashboard')
+    st.header('Dashboard')
 
     df = load_tasks()
 
@@ -96,7 +96,7 @@ if menu == 'Dashboard':
 
 # ---------- Nova Solicitação ----------
 elif menu == 'Nova Solicitação':
-    st.header('📝 Nova Solicitação')
+    st.header('Nova Solicitação')
 
     with st.form('nova_tarefa'):
         titulo = st.text_input('Título', placeholder='Ex: Revisar relatório mensal')
@@ -114,14 +114,14 @@ elif menu == 'Nova Solicitação':
         if submitted:
             if titulo.strip():
                 add_task(titulo, descricao, responsavel, prioridade)
-                st.success(f'✅ Tarefa "{titulo}" criada com sucesso!')
+                st.success(f'Tarefa "{titulo}" criada com sucesso!')
                 st.balloons()
             else:
                 st.error('Por favor, preencha o título da tarefa!')
 
 # ---------- Lista de Tarefas ----------
 elif menu == 'Tarefas':
-    st.header('📋 Lista de Tarefas')
+    st.header('Lista de Tarefas')
 
     df = load_tasks()
 
@@ -169,17 +169,17 @@ elif menu == 'Tarefas':
                         update_status(row['id'], new_status)
                         st.rerun()
     else:
-        st.info("📭 Nenhuma tarefa encontrada. Que tal criar a primeira?")
+        st.info("Nenhuma tarefa encontrada. Que tal criar a primeira?")
 
 # ---------- Equipe ----------
 elif menu == 'Equipe':
-    st.header('👥 Nossa Equipe')
+    st.header('Equipe')
 
     equipe = [
-        {'nome': 'Ana Silva', 'cargo': 'Coordenadora', 'email': 'ana@empresa.com'},
-        {'nome': 'Bruno Santos', 'cargo': 'Analista Senior', 'email': 'bruno@empresa.com'},
-        {'nome': 'Carla Oliveira', 'cargo': 'Desenvolvedora', 'email': 'carla@empresa.com'},
-        {'nome': 'Daniel Costa', 'cargo': 'Analista Junior', 'email': 'daniel@empresa.com'}
+        {'nome': 'Isabel', 'cargo': 'Analista', 'email': 'isabel.cruz@fgv.br'},
+        {'nome': 'Douglas', 'cargo': 'Analista', 'email': 'Douglas@fgv.br'},
+        {'nome': 'Guilherme', 'cargo': 'Desenvolvedor', 'email': 'guilherme@fgv.br'},
+        {'nome': 'Leandro', 'cargo': 'Coordenador', 'email': 'leandro.vento@fgv.br'}
     ]
 
     for pessoa in equipe:
@@ -209,4 +209,4 @@ elif menu == 'Equipe':
 
 # Footer
 st.markdown("---")
-st.markdown("**EquipeApp** - Sistema de Controle de Demandas | Desenvolvido com ❤️ e Streamlit")
+st.markdown("**EquipeApp** - Sistema de Controle de Demandas | Desenvolvido por Bel (Git: BellDataSc) com Streamlit")

@@ -149,7 +149,7 @@ elif menu == 'Tarefas':
                 col1, col2, col3 = st.columns([3, 1, 1])
 
                 with col1:
-                    st.subheader(f"#{row['id']} - {row['titulo']}")
+                    st.subheader(f" {row ['id']} - {row ['titulo']}")
                     st.write(f" {row['descricao']}")
                     st.write(f" **{row['responsavel']}** | **{row['prioridade']}**")
                     st.caption(f"Criado em: {row['criado_em']}")
@@ -188,9 +188,9 @@ elif menu == 'Equipe':
             col1, col2 = st.columns([1, 2])
 
             with col1:
-                st.markdown(f"### 👤 {pessoa['nome']}")
+                st.markdown(f"###  {pessoa['nome']}")
                 st.write(f"**{pessoa['cargo']}**")
-                st.write(f"📧 {pessoa['email']}")
+                st.write(f" {pessoa['email']}")
 
             with col2:
                 # Estatísticas da pessoa

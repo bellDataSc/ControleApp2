@@ -172,7 +172,7 @@ elif menu == 'Tarefas':
         st.info("Nenhuma tarefa encontrada. Que tal criar a primeira?")
 
 # ---------- Equipe ----------
-elif menu == 'Equipe':
+elif menu == 'Automação & Dados - FGV IBRE':
     st.header('Equipe')
 
     equipe = [

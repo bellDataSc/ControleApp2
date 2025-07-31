@@ -62,7 +62,7 @@ st.set_page_config(page_title='EquipeApp', layout='wide')
 st.title('EquipeApp - Controle de Demandas')
 
 # Sidebar com navegação
-menu = st.sidebar.selectbox('Menu', ['Dashboard', 'Nova Solicitação', 'Tarefas', 'Equipe'])
+menu = st.sidebar.selectbox('Menu', ['Dashboard', 'Nova Solicitação', 'Tarefas', 'Automação & Dados - FGV IBRE'])
 
 # ---------- Dashboard ----------
 if menu == 'Dashboard':
@@ -176,10 +176,10 @@ elif menu == 'Equipe':
     st.header('Equipe')
 
     equipe = [
-        {'nome': 'Isabel', 'cargo': 'Analista', 'email': 'isabel.cruz@fgv.br'},
+        {'nome': 'Isabel', 'cargo': 'Analista', 'email': 'isabel@fgv.br'},
         {'nome': 'Douglas', 'cargo': 'Analista', 'email': 'Douglas@fgv.br'},
         {'nome': 'Guilherme', 'cargo': 'Desenvolvedor', 'email': 'guilherme@fgv.br'},
-        {'nome': 'Leandro', 'cargo': 'Coordenador', 'email': 'leandro.vento@fgv.br'}
+        {'nome': 'Leandro', 'cargo': 'Coordenador', 'email': 'leandro@fgv.br'}
     ]
 
     for pessoa in equipe:

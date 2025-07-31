@@ -78,7 +78,7 @@ if menu == 'Dashboard':
 
         with col2:
             novas = len(df[df['status'] == 'Pendente'])
-            st.metric("Pendente", pendente)
+            st.metric("Pendente", novas)
 
         with col3:
             andamento = len(df[df['status'] == 'Em Andamento'])
@@ -154,16 +154,17 @@ elif menu == 'Tarefas':
                     st.write(f" **{row['responsavel']}** | **{row['prioridade']}**")
                     st.caption(f"Criado em: {row['criado_em']}")
 
-                # with col2:
+                with col2:
                    
-                #     status_color = {
-                #                           'Pendente',
-                #                           'Concluído',
-                #                           'Em andamento'
-                #                       }
+                                      status_color = {
+                      'Pendente': '🔴',
+                      'Concluído': '✅',
+                      'Em andamento': '🟡'
+                  }
+                  
+                  for idx, row in df.iterrows():
+                      st.markdown(f"### {status_color.get(row['status'], '❓')} {row['status']}")
 
-                #     for idx, row in df.iterrows():
-                #         st.markdown(f"### {status_color.get(row['status'])} {row['status']}")
                     
 
                 with col3:

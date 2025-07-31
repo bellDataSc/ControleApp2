@@ -77,8 +77,8 @@ if menu == 'Dashboard':
             st.metric("Total de Tarefas", len(df))
 
         with col2:
-            novas = len(df[df['status'] == 'Novo'])
-            st.metric("Novas", novas)
+            novas = len(df[df['status'] == 'Pendente'])
+            st.metric("Pendente", novas)
 
         with col3:
             andamento = len(df[df['status'] == 'Em Andamento'])

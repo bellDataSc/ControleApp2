@@ -44,7 +44,7 @@ c = conn.cursor()
 def add_task(titulo, desc, resp, prioridade):
     now = datetime.now().isoformat(' ', 'seconds')
     c.execute("INSERT INTO tasks (titulo, descricao, responsavel, prioridade, status, criado_em, atualizado_em) VALUES (?,?,?,?,?,?,?)",
-              (titulo, desc, resp, prioridade, 'Novo', now, now))
+              (titulo, desc, resp, prioridade, 'Pendente', now, now))
     conn.commit()
 
 def update_status(task_id, new_status):
@@ -78,7 +78,7 @@ if menu == 'Dashboard':
 
         with col2:
             novas = len(df[df['status'] == 'Pendente'])
-            st.metric("Pendente", novas)
+            st.metric("Pendente", pendente)
 
         with col3:
             andamento = len(df[df['status'] == 'Em Andamento'])

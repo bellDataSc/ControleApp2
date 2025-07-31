@@ -156,7 +156,7 @@ elif menu == 'Tarefas':
 
                 with col2:
                     status_color = {'Novo', 'Em Andamento', 'Concluído'}
-                    st.markdown(f"### {status_color.get(row['status'])} {row['status']}")
+                    st.markdown(f"### {status_color.get(row['status'] '?')} {row['status']}")
 
                 with col3:
                     new_status = st.selectbox(

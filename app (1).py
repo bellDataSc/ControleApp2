@@ -169,8 +169,8 @@ elif menu == 'Tarefas':
                 with col3:
                     new_status = st.selectbox(
                         f'Status #{row["id"]}',
-                        ['Novo', 'Em Andamento', 'Concluído'],
-                        index=['Novo', 'Em Andamento', 'Concluído'].index(row['status']),
+                        ['Pendente', 'Em Andamento', 'Concluído'],
+                        index=['Pendente', 'Em Andamento', 'Concluído'].index(row['status']),
                         key=f"status_{row['id']}"
                     )
                     if new_status != row['status']:

@@ -105,7 +105,7 @@ elif menu == 'Nova Solicitação':
         col1, col2 = st.columns(2)
         with col1:
             responsavel = st.selectbox('Responsável', 
-                                     ['Ana Silva', 'Bruno Santos', 'Carla Oliveira', 'Daniel Costa'])
+                                     ['Leandro', 'Isabel', 'Douglas', 'Guilherme'])
         with col2:
             prioridade = st.selectbox('Prioridade', ['Alta', 'Média', 'Baixa'])
 
@@ -188,9 +188,9 @@ elif menu == 'Equipe':
             col1, col2 = st.columns([1, 2])
 
             with col1:
-                st.markdown(f"### 🤖 {pessoa['nome']}")
+                st.markdown(f"### {pessoa['nome']}")
                 st.write(f"**{pessoa['cargo']}**")
-                st.write(f"💣 {pessoa['email']}")
+                st.write(f"{pessoa['email']}")
 
             with col2:
                 # Estatísticas da pessoa

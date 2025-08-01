@@ -44,7 +44,7 @@ c = conn.cursor()
 def add_task(titulo, desc, resp, prioridade):
     now = datetime.now().isoformat(' ', 'seconds')
     c.execute("INSERT INTO tasks (titulo, descricao, responsavel, prioridade, status, criado_em, atualizado_em) VALUES (?,?,?,?,?,?,?)",
-              (titulo, desc, resp, prioridade, 'Pendente', now, now))
+              (titulo, desc, resp, prioridade, 'Novo', now, now))
     conn.commit()
 
 def update_status(task_id, new_status):
@@ -59,14 +59,14 @@ def load_tasks():
 
 # ---------- UI ----------
 st.set_page_config(page_title='EquipeApp', layout='wide')
-st.title('EquipeApp - Controle de Demandas')
+st.title('📋 EquipeApp - Controle de Demandas')
 
 # Sidebar com navegação
-menu = st.sidebar.selectbox('Menu', ['Dashboard', 'Nova Solicitação', 'Tarefas', 'Automação & Dados - FGV IBRE'])
+menu = st.sidebar.selectbox('Menu', ['Dashboard', 'Nova Solicitação', 'Tarefas', 'Equipe'])
 
 # ---------- Dashboard ----------
 if menu == 'Dashboard':
-    st.header('Dashboard')
+    st.header('📊 Dashboard')
 
     df = load_tasks()
 
@@ -77,8 +77,8 @@ if menu == 'Dashboard':
             st.metric("Total de Tarefas", len(df))
 
         with col2:
-            novas = len(df[df['status'] == 'Pendente'])
-            st.metric("Pendente", novas)
+            novas = len(df[df['status'] == 'Novo'])
+            st.metric("Novas", novas)
 
         with col3:
             andamento = len(df[df['status'] == 'Em Andamento'])
@@ -96,7 +96,7 @@ if menu == 'Dashboard':
 
 # ---------- Nova Solicitação ----------
 elif menu == 'Nova Solicitação':
-    st.header('Nova Solicitação')
+    st.header('📝 Nova Solicitação')
 
     with st.form('nova_tarefa'):
         titulo = st.text_input('Título', placeholder='Ex: Revisar relatório mensal')
@@ -105,7 +105,7 @@ elif menu == 'Nova Solicitação':
         col1, col2 = st.columns(2)
         with col1:
             responsavel = st.selectbox('Responsável', 
-                                     ['Isabel', 'Douglas', 'Guilherme', 'Leandro'])
+                                     ['Ana Silva', 'Bruno Santos', 'Carla Oliveira', 'Daniel Costa'])
         with col2:
             prioridade = st.selectbox('Prioridade', ['Alta', 'Média', 'Baixa'])
 
@@ -114,14 +114,14 @@ elif menu == 'Nova Solicitação':
         if submitted:
             if titulo.strip():
                 add_task(titulo, descricao, responsavel, prioridade)
-                st.success(f'Tarefa "{titulo}" criada com sucesso!')
+                st.success(f'✅ Tarefa "{titulo}" criada com sucesso!')
                 st.balloons()
             else:
                 st.error('Por favor, preencha o título da tarefa!')
 
 # ---------- Lista de Tarefas ----------
 elif menu == 'Tarefas':
-    st.header('Lista de Tarefas')
+    st.header('📋 Lista de Tarefas')
 
     df = load_tasks()
 
@@ -149,46 +149,37 @@ elif menu == 'Tarefas':
                 col1, col2, col3 = st.columns([3, 1, 1])
 
                 with col1:
-                    st.subheader(f" {row ['id']} - {row ['titulo']}")
-                    st.write(f" {row['descricao']}")
-                    st.write(f" **{row['responsavel']}** | **{row['prioridade']}**")
+                    st.subheader(f"#{row['id']} - {row['titulo']}")
+                    st.write(f"📝 {row['descricao']}")
+                    st.write(f"👤 **{row['responsavel']}** | 🎯 **{row['prioridade']}**")
                     st.caption(f"Criado em: {row['criado_em']}")
 
                 with col2:
-                   
-                                      status_color = {
-                      'Pendente': '🔴',
-                      'Concluído': '✅',
-                      'Em andamento': '🟡'
-                  }
-                  
-                  for idx, row in df.iterrows():
-                      st.markdown(f"### {status_color.get(row['status'], '❓')} {row['status']}")
-
-                    
+                    status_color = {'Novo': '🆕', 'Em Andamento': '⏳', 'Concluído': '✅'}
+                    st.markdown(f"### {status_color.get(row['status'], '❓')} {row['status']}")
 
                 with col3:
                     new_status = st.selectbox(
                         f'Status #{row["id"]}',
-                        ['Pendente', 'Em Andamento', 'Concluído'],
-                        index=['Pendente', 'Em Andamento', 'Concluído'].index(row['status']),
+                        ['Novo', 'Em Andamento', 'Concluído'],
+                        index=['Novo', 'Em Andamento', 'Concluído'].index(row['status']),
                         key=f"status_{row['id']}"
                     )
                     if new_status != row['status']:
                         update_status(row['id'], new_status)
                         st.rerun()
     else:
-        st.info("Nenhuma tarefa encontrada. Que tal criar a primeira?")
+        st.info("📭 Nenhuma tarefa encontrada. Que tal criar a primeira?")
 
 # ---------- Equipe ----------
-elif menu == 'Automação & Dados - FGV IBRE':
-    st.header('Equipe')
+elif menu == 'Equipe':
+    st.header('👥 Nossa Equipe')
 
     equipe = [
-        {'nome': 'Isabel', 'cargo': 'Analista', 'email': 'isabel@fgv.br'},
-        {'nome': 'Douglas', 'cargo': 'Analista', 'email': 'Douglas@fgv.br'},
-        {'nome': 'Guilherme', 'cargo': 'Desenvolvedor', 'email': 'guilherme@fgv.br'},
-        {'nome': 'Leandro', 'cargo': 'Coordenador', 'email': 'leandro@fgv.br'}
+        {'nome': 'Ana Silva', 'cargo': 'Coordenadora', 'email': 'ana@empresa.com'},
+        {'nome': 'Bruno Santos', 'cargo': 'Analista Senior', 'email': 'bruno@empresa.com'},
+        {'nome': 'Carla Oliveira', 'cargo': 'Desenvolvedora', 'email': 'carla@empresa.com'},
+        {'nome': 'Daniel Costa', 'cargo': 'Analista Junior', 'email': 'daniel@empresa.com'}
     ]
 
     for pessoa in equipe:
@@ -197,9 +188,9 @@ elif menu == 'Automação & Dados - FGV IBRE':
             col1, col2 = st.columns([1, 2])
 
             with col1:
-                st.markdown(f"###  {pessoa['nome']}")
+                st.markdown(f"### 👤 {pessoa['nome']}")
                 st.write(f"**{pessoa['cargo']}**")
-                st.write(f" {pessoa['email']}")
+                st.write(f"📧 {pessoa['email']}")
 
             with col2:
                 # Estatísticas da pessoa
@@ -215,6 +206,7 @@ elif menu == 'Automação & Dados - FGV IBRE':
                     with col_c:
                         concluidas = len(pessoa_tasks[pessoa_tasks['status'] == 'Concluído'])
                         st.metric("Concluídas", concluidas)
+
 
 # Footer
 st.markdown("---")
